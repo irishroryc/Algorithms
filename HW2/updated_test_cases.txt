@@ -1,0 +1,217 @@
+================== CODE ====================
+
+from hashtable_linear_probing import HashTable as HashTableProbing
+from cs5112_hash import cs5112_hash1
+
+print("cs5112_hash1(1) % 10 = ", cs5112_hash1(1) % 10)
+print("cs5112_hash1(11) % 10 = ", cs5112_hash1(11) % 10)
+print("cs5112_hash1(111) % 10 = ", cs5112_hash1(111) % 10)
+
+print("cs5112_hash1(9) % 10 = ", cs5112_hash1(9) % 10)
+print("cs5112_hash1(99) % 10 = ", cs5112_hash1(99) % 10)
+
+
+for (name, HashTable) in [("linear probing", HashTableProbing)]:  
+  '''
+  probing: collision_get: Test did not pass (2 points)
+  testcase was [insert ('{'obj1',0,1,2}','value1'), insert ('{'obj2',0,1,2}','value2'), get ('{'obj1',0,1,2}'), get ('{'obj2',0,1,2}')] 
+  Return value from call number 3 disagreed -- student: value1, solution: value2
+  '''
+  print("Test: collision_get")
+  my_tbl = HashTable()
+  print("Insert value1 with key 1 (hash 1)")
+  print("Insert value2 with key 11 (hash 1)")
+  my_tbl.insert(1, 'value1')
+  my_tbl.insert(11, 'value2')
+  my_tbl.print()
+  print("my_tbl.get(1) = ", my_tbl.get(1))
+  print("my_tbl.get(11) = ", my_tbl.get(11))
+  
+  '''
+  probing: collision_update: Test did not pass (2 points)
+  testcase was [insert ('{'obj1',0,1,2}','value1'), insert ('{'obj2',0,1,2}','value2'), insert ('{'obj2',0,1,2}','value3'), get ('{'obj2',0,1,2}'), get ('{'obj1',0,1,2}')] 
+  Return value from call number 3 disagreed -- student: value1, solution: value3
+  '''
+  print("Test: collision_update")
+  my_tbl = HashTable()
+  print("Insert value1 with key 1 (hash 1)")
+  print("Insert value2 with key 11 (hash 1)")
+  print("Insert value3 with key 11 (hash 1)")
+  my_tbl.insert(1, 'value1')
+  my_tbl.insert(11, 'value2')
+  my_tbl.insert(11, 'value3')
+  my_tbl.print()
+  print("my_tbl.get(11) = ", my_tbl.get(11))
+  print("my_tbl.get(1) = ", my_tbl.get(1))
+  
+  '''
+  probing: wraparound_get: Test did not pass (2 points)
+  testcase was [insert ('{'w1',9,9,9}','value1'), insert ('{'w2',9,9,9}','value2'), get ('{'w2',9,9,9}')] 
+  Return value from call number 2 disagreed -- student: value1, solution: value2
+  '''
+  print("Test: wraparound_get")
+  my_tbl = HashTable()
+  print("Insert value1 with key 9 (hash 9)")
+  print("Insert value2 with key 99 (hash 9)")
+  my_tbl.insert(9, 'value1')
+  my_tbl.insert(99, 'value2')
+  my_tbl.print()
+  print("my_tbl.get(99) = ", my_tbl.get(99))
+  
+  '''
+  probing: collision_remove: Test did not pass (2 points)
+  testcase was [insert ('{'obj1',0,1,2}','value1'), insert ('{'obj2',0,1,2}','value2'), get ('{'obj1',0,1,2}'), remove ('{'obj1',0,1,2}'), get ('{'obj2',0,1,2}'), remove ('{'obj2',0,1,2}'), size] 
+  Return value from call number 4 disagreed -- student: True, solution: value2
+  '''
+  print("Test: collision_remove")
+  my_tbl = HashTable()
+  print("Insert value1 with key 1 (hash 1)")
+  print("Insert value2 with key 11 (hash 1)")
+  my_tbl.insert(1, 'value1')
+  my_tbl.insert(11, 'value2')
+  my_tbl.print()
+  print("my_tbl.get(1) = ", my_tbl.get(1))
+  print("my_tbl.remove(1) = ", my_tbl.remove(1))
+  my_tbl.print()
+  print("my_tbl.get(11) = ", my_tbl.get(11))
+  print("my_tbl.remove(11) = ", my_tbl.remove(11))
+  
+  '''
+  probing: collision_remove2: Test did not pass (2 points)
+  testcase was [insert ('{'obj1',0,1,2}','value1'), insert ('{'obj2',0,1,2}','value2'), get ('{'obj2',0,1,2}'), remove ('{'obj2',0,1,2}'), get ('{'obj1',0,1,2}'), remove ('{'obj1',0,1,2}'), size] 
+  Return value from call number 2 disagreed -- student: value1, solution: value2
+  '''
+  print("Test: collision_remove2")
+  my_tbl = HashTable()
+  print("Insert value1 with key 1 (hash 1)")
+  print("Insert value2 with key 11 (hash 1)")
+  my_tbl.insert(1, 'value1')
+  my_tbl.insert(11, 'value2')
+  my_tbl.print()
+  print("my_tbl.get(11) = ", my_tbl.get(11))
+  print("my_tbl.remove(11) = ", my_tbl.remove(11))
+  my_tbl.print()
+  print("my_tbl.get(1) = ", my_tbl.get(1))
+  print("my_tbl.remove(1) = ", my_tbl.remove(1))
+  
+
+================  OUTPUT ===================
+
+cs5112_hash1(1) % 10 =  1
+cs5112_hash1(11) % 10 =  1
+cs5112_hash1(111) % 10 =  1
+cs5112_hash1(9) % 10 =  9
+cs5112_hash1(99) % 10 =  9
+Test: collision_get
+Insert value1 with key 1 (hash 1)
+Insert value2 with key 11 (hash 1)
+Current contents of HashTable Array
+Size:  2
+0  =  None
+1  =  (1, 'value1')
+2  =  (11, 'value2')
+3  =  None
+4  =  None
+5  =  None
+6  =  None
+7  =  None
+8  =  None
+9  =  None
+my_tbl.get(1) =  value1
+my_tbl.get(11) =  value1
+Test: collision_update
+Insert value1 with key 1 (hash 1)
+Insert value2 with key 11 (hash 1)
+Insert value3 with key 11 (hash 1)
+Current contents of HashTable Array
+Size:  2
+0  =  None
+1  =  (1, 'value1')
+2  =  (11, 'value3')
+3  =  None
+4  =  None
+5  =  None
+6  =  None
+7  =  None
+8  =  None
+9  =  None
+my_tbl.get(11) =  value1
+my_tbl.get(1) =  value1
+Test: wraparound_get
+Insert value1 with key 9 (hash 9)
+Insert value2 with key 99 (hash 9)
+Current contents of HashTable Array
+Size:  2
+0  =  (99, 'value2')
+1  =  None
+2  =  None
+3  =  None
+4  =  None
+5  =  None
+6  =  None
+7  =  None
+8  =  None
+9  =  (9, 'value1')
+my_tbl.get(99) =  value1
+Test: collision_remove
+Insert value1 with key 1 (hash 1)
+Insert value2 with key 11 (hash 1)
+Current contents of HashTable Array
+Size:  2
+0  =  None
+1  =  (1, 'value1')
+2  =  (11, 'value2')
+3  =  None
+4  =  None
+5  =  None
+6  =  None
+7  =  None
+8  =  None
+9  =  None
+my_tbl.get(1) =  value1
+my_tbl.remove(1) =  value1
+Current contents of HashTable Array
+Size:  1
+0  =  None
+1  =  (None, True)
+2  =  (11, 'value2')
+3  =  None
+4  =  None
+5  =  None
+6  =  None
+7  =  None
+8  =  None
+9  =  None
+my_tbl.get(11) =  True
+my_tbl.remove(11) =  value2
+Test: collision_remove2
+Insert value1 with key 1 (hash 1)
+Insert value2 with key 11 (hash 1)
+Current contents of HashTable Array
+Size:  2
+0  =  None
+1  =  (1, 'value1')
+2  =  (11, 'value2')
+3  =  None
+4  =  None
+5  =  None
+6  =  None
+7  =  None
+8  =  None
+9  =  None
+my_tbl.get(11) =  value1
+my_tbl.remove(11) =  value2
+Current contents of HashTable Array
+Size:  1
+0  =  None
+1  =  (1, 'value1')
+2  =  (None, True)
+3  =  None
+4  =  None
+5  =  None
+6  =  None
+7  =  None
+8  =  None
+9  =  None
+my_tbl.get(1) =  value1
+my_tbl.remove(1) =  value1
